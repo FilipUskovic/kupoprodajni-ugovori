@@ -1,0 +1,78 @@
+## radi jednostavno cu vamo imati hardiranje vrijednosto sto nije dobra praksa
+## u applicatrion-env ima primjer toga
+TODO: u pravom svjetu bi korsiti env varijable .env file gdje bi sakrio lozinke i ostale osjetljive podatke
+
+
+spring:
+  application:
+    name: kupoprodajni
+  datasource:
+    url: jdbc:postgresql://localhost:5432/kupoprodajni?currentSchema=kupoprodajni
+    username: user
+    password: sifra
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: kupoprodajni
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        use_sql_comments: true
+
+
+
+
+  flyway:
+    enabled: true
+    schemas: kupoprodajni
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    #baseline-version: 1
+    #validate-on-migrate: true
+
+#swagger konfiguracija
+  springdoc:
+    swagger-ui:
+      persist-authorization: true
+      enabled: true
+      path: /swagger-ui.html
+    api-docs:
+      path: /v3/api-docs
+
+
+  jwt:
+    secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    expiration: 86400000
+
+server:
+  port: ${SERVER_PORT:8081}
+
+
+logging:
+  level:
+    org.springframework.security.web.FilterChainProxy: DEBUG
+    org.springframework.security.web.access: DEBUG
+    org.springframework.security: DEBUG
+    com.kupoprodajniugovori : DEBUG
+    #root: INFO
+    #com.kupoprodajniugovori: DEBUG
+    #org:
+      #flywaydb: DEBUG
+      #springframework:
+        #jdbc:
+         # core: DEBUG
+        #security: DEBUG
+     # hibernate:
+      #  SQL: DEBUG
+       # type:
+        #  descriptor:
+         #   sql: TRACE
+    #com:
+     # zaxxer:
+      #  hikari: DEBUG

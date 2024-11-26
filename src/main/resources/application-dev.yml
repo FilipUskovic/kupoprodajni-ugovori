@@ -1,0 +1,44 @@
+
+## ovo je primjer kako bi izgledao dev okruzenje koje bi morali posativi da springboot pokrece
+TODO: naravno morali bi postaviti tipa run -> edit configuration pa tamo dodati env varijable i postaviti env kao aktivan profile
+## ako zelimo to radit ovo su env varialle koje treba postaviti -> i novi springboot profile bi bio dev
+  ## DB_NAME=kupoprodajni;DB_PASSWORD=sifra;DB_USER=user;SPRING_PROFILES_ACTIVE=dev;DB_HOST=localhost
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        use_sql_comments: true
+
+logging:
+  level:
+    root: INFO
+    com.kupoprodajniugovori: DEBUG
+    org:
+      flywaydb: DEBUG
+      springframework:
+        jdbc:
+          core: DEBUG
+        security: DEBUG
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql: TRACE
+    com:
+      zaxxer:
+        hikari: DEBUG
+
