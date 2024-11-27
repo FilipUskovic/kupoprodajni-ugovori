@@ -94,11 +94,9 @@ class ArtikleServiceImplUnitTest {
     }
 
 
-// Također, dodajmo test za uspješni scenarij
 @Test
 void shouldReturnArticlesWhenPageExists() {
-    // Arrange
-    Pageable pageable = PageRequest.of(0, 10); // Prva stranica
+    Pageable pageable = PageRequest.of(0, 10); 
     List<Artikl> artikli = List.of(
             createTestArtikl(1L, "Artikl 1"),
             createTestArtikl(2L, "Artikl 2")
@@ -107,16 +105,14 @@ void shouldReturnArticlesWhenPageExists() {
     Page<Artikl> artiklPage = new PageImpl<>(
             artikli,
             pageable,
-            15 // total elements
+            15 
     );
 
     when(artiklRepository.findAllByUgovorObrisanFalse(pageable))
             .thenReturn(artiklPage);
 
-    // Act
     List<ArtiklDTO> result = artiklService.findAllArtikle(pageable);
 
-    // Assert
     assertThat(result).hasSize(2);
     assertThat(result.get(0).naziv()).isEqualTo("Artikl 1");
 }
